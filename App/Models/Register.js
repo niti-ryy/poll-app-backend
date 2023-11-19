@@ -12,6 +12,6 @@ const userSchema=new Schema({
        pollsCreated:[Schema.Types.ObjectId]
 },{timestamps:true})
 
-const User=mongoose.model("User",registerSchema)
+const User=mongoose.model("User",userSchema)
 
 module.exports=User

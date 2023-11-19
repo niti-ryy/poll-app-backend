@@ -1,4 +1,4 @@
-const userValidation={
+const userValidationSchema={
     username:{
         notEmpty:{
             errorMessage:"username is required"
@@ -20,4 +20,4 @@ const userValidation={
     }
 }
 
-module.exports=userValidation
+module.exports=userValidationSchema
