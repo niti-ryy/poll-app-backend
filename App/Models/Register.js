@@ -1,10 +1,17 @@
 const mongoose=require("mongoose")
 const {Schema}=mongoose
 
-const registerSchema=new Schema({
+const userSchema=new Schema({
+       username:String,
+       email:String,
+       password:String,
+       registrationDate:{
+            type:Date,
+            default:new Date()
+       },
+       pollsCreated:[Schema.Types.ObjectId]
+},{timestamps:true})
 
-})
+const User=mongoose.model("User",registerSchema)
 
-const Register=mongoose.model("Register",registerSchema)
-
-module.exports=Register
+module.exports=User
