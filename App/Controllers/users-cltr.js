@@ -50,4 +50,14 @@ usersCltr.login=async(req,res)=>{
         console.log(e)
     }
 }
+
+usersCltr.account=async(req,res)=>{
+    console.log(req)
+    try{
+        const user=await User.findById(req.user.id)
+        res.json(user)
+    }catch(e){
+        res.status(500).json({errors:"something went wrong"})
+    }
+}
 module.exports=usersCltr

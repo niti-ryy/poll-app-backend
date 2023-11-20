@@ -5,6 +5,7 @@ const {checkSchema}=require("express-validator")
 const cors=require("cors")
 const {userRegisterValidationSchema, userLoginValidationSchema} = require("./App/helpers/user-validation")
 const usersCltr = require("./App/Controllers/users-cltr")
+const { authenticateUser } = require("./App/middlewears/authenticateUSer")
 const app=express()
 app.use(express.json())
 app.use(cors())
@@ -14,6 +15,7 @@ configdb()
 
 app.post("/auth/register",checkSchema(userRegisterValidationSchema),usersCltr.register)
 app.post("/auth/login",checkSchema(userLoginValidationSchema),usersCltr.login)
+app.get("/api/users/account",authenticateUser,usersCltr.account)
 
 app.listen(port,()=>{
     console.log("backend connected successfully on port ",port)
