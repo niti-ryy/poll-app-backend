@@ -1,5 +1,6 @@
 const User=require("../Models/Register")
 const bcryptjs=require("bcryptjs")
+const jwt=require("jsonwebtoken")
 const {validationResult}=require("express-validator")
 const usersCltr={}
 
@@ -26,4 +27,27 @@ usersCltr.register=async(req,res)=>{
     }
 }
 
+usersCltr.login=async(req,res)=>{
+    const errors=validationResult(req)
+    if(!errors.isEmpty()){
+        return res.status(400).json({errors:errors.array()})
+    }
+    const {body}=req
+    try{
+        const user=await User.findOne({email:body.email})
+        if(!user){
+            return res.status(400).json("invalid email or password")
+        }
+        const result=await bcryptjs.compare(body.password,user.password)
+        if(!result){
+            return res.status(400).json("invalid email or password")
+        }
+        const tokenData={id:user._id}
+        const token=jwt.sign(tokenData,process.env.JWT_SECRET,{expiresIn:"1d"})
+        res.json({token:`Bearer ${token}`})
+    }catch(e){
+        res.status(500).json(e)
+        console.log(e)
+    }
+}
 module.exports=usersCltr
