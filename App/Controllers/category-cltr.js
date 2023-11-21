@@ -9,7 +9,8 @@ categoryCltr.create=async(req,res)=>{
         return res.status(400).json({errors:errors.array()})
     }
     const {body}=req
-    const categoryObj = await Category.findOne({ name: { $regex: new RegExp(body.name, 'i') } });
+    //ensure uniquness of categories
+    const categoryObj = await Category.findOne({ name: { $regex: new RegExp(body.name, 'i') } });  //refer this once to dct git 
     if(!categoryObj){
         const category=new Category(body)
         try{
