@@ -23,7 +23,7 @@ usersCltr.register=async(req,res)=>{
             user:saveduser
         })
     }catch(e){
-
+        res.status(500).json(e)
     }
 }
 
@@ -60,4 +60,6 @@ usersCltr.account=async(req,res)=>{
         res.status(500).json({errors:"something went wrong"})
     }
 }
+
+
 module.exports=usersCltr
