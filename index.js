@@ -9,6 +9,8 @@ const { authenticateUser } = require("./App/middlewears/authenticateUSer")
 const categorynameSchema = require("./App/helpers/category-validation")
 const categoryCltr = require("./App/Controllers/category-cltr")
 const categoryValidationSchema = require("./App/helpers/category-validation")
+const pollValidationSchema = require("./App/helpers/polls-validation")
+const pollsCltr = require("./App/Controllers/polls-cltr")
 const app=express()
 app.use(express.json())
 app.use(cors())
@@ -23,6 +25,9 @@ app.get("/api/users/account",authenticateUser,usersCltr.account)
 //CATEGORY CLTR
 app.post("/api/categories",checkSchema(categoryValidationSchema),categoryCltr.create)
 app.get("/api/categories",categoryCltr.list)
+
+//POLLS CLTR
+app.post("/api/polls",authenticateUser,checkSchema(pollValidationSchema),pollsCltr.create)
 
 app.listen(port,()=>{
     console.log("backend connected successfully on port ",port)

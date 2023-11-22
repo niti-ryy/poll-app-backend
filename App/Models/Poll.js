@@ -1,15 +1,25 @@
 const mongoose=require("mongoose")
 const {Schema,model}=mongoose
 
-const Poll=new Schema({
+const pollSchema=new Schema({
     question:String,
     creator:{
         type:Schema.Types.ObjectId,
         ref:"User"
     },
-    Options:[
+    options:[
         {
-           pptionText:String 
+           optionText:String 
         }
-    ]
+    ],
+    createDate:Date,
+    endDate:Date,
+    categoryId:{
+        type:Schema.Types.ObjectId,
+        ref:"Category"
+    }
 })
+
+const Poll=model("Poll",pollSchema)
+
+module.exports=Poll
