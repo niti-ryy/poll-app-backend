@@ -9,22 +9,15 @@ categoryCltr.create=async(req,res)=>{
         return res.status(400).json({errors:errors.array()})
     }
     const {body}=req
-    //ensure uniquness of categories
-    const categoryObj = await Category.findOne({ name: { $regex: new RegExp(body.name, 'i') } });  //refer this once to dct git 
-    if(!categoryObj){
-        const category=new Category(body)
-        try{
-            await category.save()
-            res.json(category)
-        }catch(e){
-            res.status(500).json(e)
-        }
-    }else{
-        res.status(401).json({
-            message:"this category is already present "
-        })
-    }  
-}
+    const category=new Category(body)
+    try{
+        await category.save()
+        res.json(category)
+    }catch(e){
+        res.status(500).json(e)
+    }
+}  
+
 
 categoryCltr.list=async(req,res)=>{
     try{

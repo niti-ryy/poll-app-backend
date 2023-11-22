@@ -21,7 +21,7 @@ app.post("/auth/login",checkSchema(userLoginValidationSchema),usersCltr.login)
 app.get("/api/users/account",authenticateUser,usersCltr.account)
 
 //CATEGORY CLTR
-app.post("/api/categories",authenticateUser,checkSchema(categoryValidationSchema),categoryCltr.create)
+app.post("/api/categories",checkSchema(categoryValidationSchema),categoryCltr.create)
 app.get("/api/categories",categoryCltr.list)
 
 app.listen(port,()=>{
