@@ -12,7 +12,7 @@ const pollSchema=new Schema({
            optionText:String 
         }
     ],
-    createDate:Date,
+    createdDate:Date,
     endDate:Date,
     categoryId:{
         type:Schema.Types.ObjectId,

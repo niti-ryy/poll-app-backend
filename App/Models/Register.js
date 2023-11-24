@@ -5,10 +5,6 @@ const userSchema=new Schema({
        username:String,
        email:String,
        password:String,
-       registrationDate:{
-            type:Date,
-            default:new Date()
-       },
        pollsCreated:[Schema.Types.ObjectId]
 },{timestamps:true})
 
