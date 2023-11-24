@@ -28,6 +28,7 @@ app.get("/api/categories",categoryCltr.list)
 
 //POLLS CLTR
 app.post("/api/polls",authenticateUser,checkSchema(pollValidationSchema),pollsCltr.create)
+app.get("/api/polls/myPolls",authenticateUser,pollsCltr.myPolls)
 
 app.listen(port,()=>{
     console.log("backend connected successfully on port ",port)
