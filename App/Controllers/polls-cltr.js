@@ -30,4 +30,13 @@ pollsCltr.myPolls=async(req,res)=>{
     }
 }
 
+pollsCltr.active=async(req,res)=>{
+    try{
+        const polls=await Poll.find({endDate:{$gte:new Date()}})
+        res.json(polls)
+    }catch(e){
+        res.status(500).json(e)
+    }
+}
+
 module.exports=pollsCltr
