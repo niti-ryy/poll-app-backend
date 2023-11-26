@@ -30,12 +30,18 @@ pollsCltr.myPolls=async(req,res)=>{
     }
 }
 
+// const currentDate = new Date();
+// const endOfDay = new Date(currentDate);
+// endOfDay.setHours(23, 59, 59, 999); // Set to the end of the current day
+
+
+
 pollsCltr.active=async(req,res)=>{
-    try{
-        const polls=await Poll.find({endDate:{$gte:new Date()}})
-        res.json(polls)
-    }catch(e){
-        res.status(500).json(e)
+    try {
+        const polls = await Poll.find({ endDate: { $gte: new Date() } }).populate("categoryId");
+        res.json(polls);
+    }catch (e) {
+        res.status(500).json(e);
     }
 }
 
