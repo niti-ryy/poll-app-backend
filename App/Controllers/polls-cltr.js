@@ -38,7 +38,7 @@ pollsCltr.myPolls=async(req,res)=>{
 
 pollsCltr.active=async(req,res)=>{
     try {
-        const polls = await Poll.find({ endDate: { $gte: new Date() } }).populate("categoryId");
+        const polls = await Poll.find({ endDate: { $gte: new Date() } }).populate("categoryId").populate("creator",["username","_id"]);
         res.json(polls);
     }catch (e) {
         res.status(500).json(e);
